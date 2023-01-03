@@ -17,7 +17,9 @@ describe("Create a new user", () => {
       email: "test@test.com",
       password: "senhasecreta"
     })
+
     const userRegister = await userRepositoryInMemory.findByEmail(user.email);
+
     expect(userRegister).toHaveProperty("id");
   });
 
