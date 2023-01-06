@@ -42,5 +42,31 @@ describe("Authenticate user", () => {
         expect(response.body.user).toHaveProperty("id");
         expect(response.body.user.email).toEqual(user.email);
         expect(response.body.token).not.toBe(undefined);
+  });
+
+  it("Should not be possible to authenticate user with invalid password", async () => {
+    const response = await request(app)
+      .post('/api/v1/sessions')
+      .send({
+        email: user.email,
+        password: "senhaincorreta"
+      });
+
+      expect(response.status).toBe(401);
+      expect(response.body.message).toEqual('Incorrect email or password');
+  });
+
+  it("Should not be possible to authenticate with a non-existent user", async () => {
+    const response = await request(app)
+    .post('/api/v1/sessions')
+    .send({
+      email: "nonexistentuser@email.com",
+      password: user.password
+    });
+
+    console.log(response.body);
+
+    expect(response.status).toBe(401);
+    expect(response.body.message).toEqual('Incorrect email or password');
   })
 });
