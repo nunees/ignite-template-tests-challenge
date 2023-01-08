@@ -21,7 +21,7 @@ describe("Create a statement", () => {
     createStatementUseCase = new CreateStatementUseCase(usersRepositoryInMemory, statementsRepositoryInMemory);
   });
 
-  it("Should be able to create a new statement", async () => {
+  it("Should be able to create a deposit statement", async () => {
     const user = {
       name: "teste",
       email: "teste@email.com",
